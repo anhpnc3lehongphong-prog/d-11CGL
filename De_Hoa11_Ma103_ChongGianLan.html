@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Đề cuối kì I Hóa 11 nâng cao – Mã đề 103</title>
+<style>
+:root{
+  --bg:#f3f5fb;--card:#ffffff;--ink:#172033;--muted:#667085;--line:#e1e6f0;
+  --brand:#2952cc;--brand2:#1f3b8f;--soft:#eaf0ff;--ok:#1a7f37;--okbg:#e6f6ec;--bad:#c62828;--badbg:#fdecec;--warn:#b54708;
+  --shadow:0 6px 24px rgba(23,32,51,.07);--r:16px
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0f131c;--card:#181d29;--ink:#e9edf6;--muted:#9aa4b8;--line:#2a3142;
+  --brand:#7ea1ff;--brand2:#243a80;--soft:#202a45;--ok:#5fd18b;--okbg:#14301f;--bad:#ff8a80;--badbg:#3a1c1b;--warn:#f6b35c;
+  --shadow:0 6px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+sub,sup{font-size:.72em;line-height:0}
+
+/* ---------- Header ---------- */
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand2),#2f5fe0);color:#fff;box-shadow:0 4px 18px rgba(20,35,90,.25)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0 12px;flex-wrap:wrap}
+.title h1{margin:0;font-size:clamp(18px,2.6vw,25px);letter-spacing:.2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:12.5px;background:rgba(255,255,255,.16);padding:3px 10px;border-radius:99px;white-space:nowrap}
+.timebox{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.16);padding:8px 16px;border-radius:14px}
+.timebox small{display:block;font-size:11px;opacity:.85;text-transform:uppercase;letter-spacing:.8px}
+.timer{font:800 26px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.timebox.low{background:#c62828;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.75}}
+.tbar{height:5px;background:rgba(255,255,255,.2)}
+.tbar div{height:100%;width:0;background:#fff;transition:width 1s linear}
+
+/* ---------- Layout ---------- */
+.layout{max-width:1120px;margin:22px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:20px;align-items:start}
+aside{position:sticky;top:112px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card>h2{margin:0 0 4px;font-size:19px;display:flex;align-items:center;gap:10px}
+.card>h2 .no{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--brand);color:#fff;font-size:14px}
+.hint{margin:0 0 6px;color:var(--muted);font-size:14px}
+
+/* ---------- Info ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.field input,.short input{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:11px;font-size:16px;background:var(--card);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.short input:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--soft)}
+.field input.err{border-color:var(--bad);box-shadow:0 0 0 4px var(--badbg)}
+
+/* ---------- Questions ---------- */
+.q{padding:18px 0;border-top:1px dashed var(--line);scroll-margin-top:130px}
+.q:first-of-type{border-top:0;padding-top:12px}
+.qh{margin-bottom:10px;font-size:16.5px}
+.qh b{color:var(--brand)}
+.opts{display:grid;gap:8px}
+.opt{position:relative;display:flex;gap:12px;align-items:center;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;transition:all .15s;background:var(--card)}
+.opt:hover{border-color:var(--brand);background:var(--soft)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .l{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--brand);font-weight:700;font-size:14px;transition:all .15s}
+.opt:has(input:checked){border-color:var(--brand);background:var(--soft);box-shadow:0 0 0 3px var(--soft)}
+.opt:has(input:checked) .l{background:var(--brand);color:#fff}
+.opt:has(input:focus-visible){outline:2px solid var(--brand);outline-offset:2px}
+
+.dt{border-collapse:collapse;margin:6px 0 12px}.dt th,.dt td{border:1.5px solid var(--line);padding:6px 14px;text-align:center}.dt th{background:var(--soft)}
+.tf{border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.tfrow:first-child{border-top:0}
+.tfrow:nth-child(even){background:color-mix(in srgb,var(--soft) 45%,transparent)}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:7px 16px;font-size:14px;font-weight:600;color:var(--muted);min-width:64px;text-align:center;transition:all .15s}
+.seg label+label span{border-left:1.5px solid var(--line)}
+.seg label:hover span{background:var(--soft)}
+.seg input[value="1"]:checked+span{background:var(--ok);color:#fff}
+.seg input[value="0"]:checked+span{background:var(--bad);color:#fff}
+.seg input:focus-visible+span{outline:2px solid var(--brand);outline-offset:-2px}
+
+.short .ans{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.short input{max-width:280px}
+.keyline{font-size:14px;font-weight:600}
+
+/* ---------- Actions ---------- */
+.btn{border:0;padding:13px 26px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;transition:transform .1s,box-shadow .15s}
+.primary{background:linear-gradient(135deg,var(--brand2),#2f5fe0);color:#fff;box-shadow:0 6px 16px rgba(41,82,204,.35)}
+.primary:hover:not(:disabled){transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.submitcard{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* ---------- Navigator ---------- */
+.nav h3{margin:0 0 10px;font-size:15px}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 12px}
+.meter div{height:100%;width:0;background:linear-gradient(90deg,#2f5fe0,#5b8cff);border-radius:99px;transition:width .25s}
+.navgrp{font-size:12px;font-weight:700;color:var(--muted);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills a{display:grid;place-items:center;min-width:34px;height:32px;padding:0 6px;border-radius:9px;border:1.5px solid var(--line);color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;transition:all .15s}
+.pills a:hover{border-color:var(--brand);color:var(--brand)}
+.pills a.done{background:var(--brand);border-color:var(--brand);color:#fff}
+.pills a.part{background:var(--soft);border-color:var(--brand);color:var(--brand)}
+.pills a.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.pills a.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+
+/* ---------- Marked after submit ---------- */
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt.bad .l{background:var(--bad);color:#fff}
+.tfrow.ok{background:var(--okbg)}.tfrow.bad{background:var(--badbg)}
+.tfrow .k{font-size:12.5px;font-weight:700;margin-top:2px}
+.ok-t{color:var(--ok)}.bad-t{color:var(--bad)}
+.short input.ok{border-color:var(--ok);background:var(--okbg)}
+.short input.bad{border-color:var(--bad);background:var(--badbg)}
+
+/* ---------- Result ---------- */
+.result{display:none}
+.res-top{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ring{--p:0;width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--c,var(--brand)) calc(var(--p)*1%),var(--line) 0)}
+.ring div{width:104px;height:104px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center}
+.ring b{font-size:30px;line-height:1}.ring small{display:block;color:var(--muted);font-size:12px}
+.parts{display:grid;grid-template-columns:repeat(3,minmax(110px,1fr));gap:10px;flex:1;min-width:260px}
+.part{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.part small{display:block;color:var(--muted);font-size:12px}.part b{font-size:19px}
+.status{margin:14px 0 0;color:var(--muted);font-size:14px}
+details{margin-top:12px}summary{cursor:pointer;font-weight:600;color:var(--brand)}
+.review{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px;font-size:13.5px}
+.review span{padding:5px 10px;border-radius:8px;border:1px solid var(--line)}
+.review span.ok{background:var(--okbg);border-color:var(--ok)}.review span.bad{background:var(--badbg);border-color:var(--bad)}
+
+footer{max-width:1120px;margin:0 auto 30px;padding:0 16px;color:var(--muted);font-size:13px;text-align:center}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;order:-1}
+  .grid{grid-template-columns:1fr}
+  .tfrow{grid-template-columns:1fr}
+  .timer{font-size:21px}
+  .parts{grid-template-columns:1fr}
+}
+/* Trang khởi động và màn hình kết thúc do giám sát */
+#securityStart,#securityEnd{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto}
+#securityStart .card,#securityEnd .card{width:min(100%,530px);margin:0;text-align:center}
+#securityStart input{width:100%;padding:12px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin:6px 0}
+#securityEnd{display:none}#securityStart[hidden],#securityEnd[hidden]{display:none}
+#securityEnd .card{border:2px solid var(--bad)}
+.security-note{font-size:14px;color:var(--muted);text-align:left}
+body.exam-ended > :not(#securityEnd){display:none!important}
+body.exam-ended #securityEnd{display:flex!important}
+</style>
+</head>
+<body>
+<div id="securityStart">
+  <section class="card">
+    <h2 style="justify-content:center">BẮT ĐẦU BÀI THI HÓA HỌC 11</h2>
+    <p><b>Mã đề 103 · 50 phút</b></p>
+    <p class="security-note">Nhập đủ thông tin và bấm <b>Bắt đầu</b> để tính giờ. Sau khi bắt đầu, nếu chuyển sang ứng dụng/tab khác, khóa màn hình hoặc hệ thống phát hiện cửa sổ thi bị thu nhỏ đáng kể, bài sẽ tự kết thúc và chấm các câu đã làm.</p>
+    <input id="startName" placeholder="Họ và tên" autocomplete="name">
+    <input id="startClass" placeholder="Lớp (ví dụ 11A1)">
+    <input id="startSbd" placeholder="Số báo danh">
+    <p id="securityStartError" style="color:var(--bad);font-weight:600" aria-live="polite"></p>
+    <button class="btn primary" id="startBtn" style="width:100%">Bắt đầu làm bài</button>
+    <p class="security-note">Lưu ý: cuộc gọi, thay đổi cửa sổ hoặc thao tác hệ thống có thể gây cảnh báo nhầm; thông báo ngay cho giáo viên nếu gặp sự cố.</p>
+  </section>
+</div>
+<div id="securityEnd" role="alertdialog" aria-modal="true" aria-live="assertive">
+  <section class="card">
+    <h2 style="justify-content:center;color:var(--bad)">BÀI THI ĐÃ KẾT THÚC</h2>
+    <p id="securityReason"></p>
+    <p>Không thể tiếp tục làm bài trên trình duyệt này. Hãy liên hệ giáo viên nếu có sự cố.</p>
+    <p id="securitySend" style="font-size:14px;color:var(--muted)"></p>
+  </section>
+</div>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">
+        <h1>ĐỀ KIỂM TRA CUỐI KÌ I – HÓA HỌC 11 (MÃ ĐỀ 103)</h1>
+        <div class="chips"><span class="chip">Phạm vi: Chương 1–3</span><span class="chip">Đề nâng cao</span><span class="chip">Cấu trúc 3 phần</span><span class="chip">50 phút</span></div>
+      </div>
+      <div class="timebox" id="timebox"><div><small>Thời gian còn lại</small><div class="timer" id="timer">50:00</div></div></div>
+    </div>
+  </div>
+  <div class="tbar"><div id="bar"></div></div>
+</header>
+
+<div class="layout">
+<main>
+  <section class="card">
+    <h2>Thông tin thí sinh</h2>
+    <div class="grid">
+      <div class="field"><label for="hoten">Họ và tên</label><input id="hoten" placeholder="Nguyễn Văn A" autocomplete="name"></div>
+      <div class="field"><label for="lop">Lớp</label><input id="lop" placeholder="11A1"></div>
+      <div class="field"><label for="sbd">SBD</label><input id="sbd" placeholder="Số báo danh"></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Thời gian làm bài: 50 phút. Khi hết giờ hệ thống tự nộp.<br>Cho biết nguyên tử khối: H = 1; C = 12; N = 14; O = 16; S = 32; Cu = 64. Thể tích mol khí ở điều kiện chuẩn (25 °C, 1 bar) là 24,79 L/mol. Câu trả lời ngắn nhập số, dùng dấu phẩy hoặc dấu chấm đều được.</p>
+  </section>
+
+  <section class="card"><h2><span class="no">I</span>Trắc nghiệm nhiều phương án lựa chọn</h2><p class="hint">Mỗi câu chỉ chọn một đáp án.</p><div id="mcq"></div></section>
+  <section class="card"><h2><span class="no">II</span>Trắc nghiệm Đúng/Sai</h2><p class="hint">Chọn Đúng hoặc Sai cho từng mệnh đề.</p><div id="tf"></div></section>
+  <section class="card"><h2><span class="no">III</span>Trả lời ngắn</h2><p class="hint">Nhập đáp án vào ô trả lời.</p><div id="short"></div></section>
+
+  <section class="card submitcard">
+    <div><b>Sẵn sàng nộp bài?</b><div class="hint" style="margin:0" id="remain">Hãy kiểm tra lại các câu chưa làm.</div></div>
+    <button class="btn primary" id="submit">Nộp bài</button>
+  </section>
+
+  <section class="card result" id="result">
+    <div class="res-top">
+      <div class="ring" id="ring"><div><span><b id="scoreNum">0</b><small>/ 10 điểm</small></span></div></div>
+      <div class="parts" id="breakdown"></div>
+    </div>
+    <p class="status" id="sendStatus"></p>
+    <details><summary>Xem đáp án và đối chiếu</summary><div class="review" id="review"></div></details>
+  </section>
+</main>
+
+<aside>
+  <div class="card nav">
+    <h3>Tiến độ làm bài</h3>
+    <div class="muted" id="cnt" style="font-size:14px;color:var(--muted)">0 / 28 câu</div>
+    <div class="meter"><div id="meter"></div></div>
+    <div class="navgrp">Phần I</div><div class="pills" id="nI"></div>
+    <div class="navgrp">Phần II</div><div class="pills" id="nII"></div>
+    <div class="navgrp">Phần III</div><div class="pills" id="nIII"></div>
+  </div>
+</aside>
+</div>
+<footer>Đề kiểm tra online · Hóa học 11</footer>
+
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq24iSyxMm8YLzMCvgTvCNgtXB3x3pZezZ3QNB91JVv4S7FzQjMivGG0MMn-M7Sg6kNg/exec";
+const MA_DE = "HOA11-CKI-NC-103";
+const MCQ=[{"q":"Hằng số cân bằng Kc của một phản ứng thuận nghịch phụ thuộc vào yếu tố nào sau đây?","o":["Nồng độ ban đầu của các chất.","Áp suất của hệ.","Chất xúc tác.","Nhiệt độ."],"a":3},{"q":"Ở 25 °C, dung dịch có giá trị pH nào sau đây làm quỳ tím chuyển sang màu đỏ?","o":["2","7","9","12"],"a":0},{"q":"Cho các phản ứng sau: (1) HCl + H2O → H3O+ + Cl−; (2) CH3COO− + H2O ⇌ CH3COOH + OH−; (3) NH3 + H2O ⇌ NH4+ + OH−; (4) CO3^2− + H2O ⇌ HCO3− + OH−. Theo thuyết Brønsted – Lowry, số phản ứng trong đó H2O đóng vai trò là acid là","o":["1","2","3","4"],"a":2},{"q":"Trộn 200 mL dung dịch HCl 0,10 M với 300 mL dung dịch Ba(OH)2 0,050 M, thu được 500 mL dung dịch X (coi thể tích không thay đổi). Giá trị pH của X ở 25 °C là","o":["1,7","2,0","12,3","12,7"],"a":2},{"q":"Cho phản ứng thuận nghịch X(g) + Y(g) ⇌ Z(g). Giá trị Kc của phản ứng ở các nhiệt độ: 300 K: 150; 400 K: 20; 500 K: 3. Phát biểu nào sau đây đúng?","o":["Phản ứng thuận tỏa nhiệt và tăng áp suất làm cân bằng chuyển dịch theo chiều thuận.","Phản ứng thuận thu nhiệt và tăng áp suất làm cân bằng chuyển dịch theo chiều thuận.","Phản ứng thuận tỏa nhiệt và tăng áp suất làm cân bằng chuyển dịch theo chiều nghịch.","Phản ứng thuận thu nhiệt và tăng áp suất làm cân bằng chuyển dịch theo chiều nghịch."],"a":0},{"q":"Sản phẩm trực tiếp của phản ứng giữa N2 và O2 trong khí quyển khi có tia lửa điện (sấm sét) là","o":["NO2","N2O5","HNO3","NO"],"a":3},{"q":"Trong dung dịch ammonia có cân bằng: NH3 + H2O ⇌ NH4+ + OH−. Ion làm phenolphthalein chuyển sang màu hồng là","o":["OH−","NH4+","H+","NO3−"],"a":0},{"q":"Cho các phản ứng sau: (1) NH4Cl + NaOH → NaCl + NH3 + H2O; (2) 3Cu + 8HNO3(loãng) → 3Cu(NO3)2 + 2NO + 4H2O; (3) NH3 + HCl → NH4Cl; (4) N2 + O2 → 2NO (tia lửa điện); (5) NH4NO2 → N2 + 2H2O (t°). Số phản ứng thuộc loại oxi hóa – khử là","o":["1","2","3","4"],"a":2},{"q":"Cho 12,8 gam Cu vào 200 mL dung dịch HNO3 2,0 M (loãng); phản ứng xảy ra hoàn toàn, thu được V lít khí NO (sản phẩm khử duy nhất; ở điều kiện chuẩn 25 °C, 1 bar, thể tích mol khí là 24,79 L/mol). Giá trị của V là","o":["1,653","2,479","3,305","4,958"],"a":1},{"q":"Nhỏ từ từ dung dịch H2SO4 đặc vào saccharose (C12H22O11) thấy chất rắn màu trắng chuyển dần sang màu đen, phồng xốp và có khí mùi hắc thoát ra. Các tính chất của H2SO4 đặc được thể hiện trong thí nghiệm này là","o":["chỉ tính acid mạnh.","tính háo nước và tính oxi hóa mạnh.","tính acid mạnh và tính khử.","chỉ tính háo nước."],"a":1},{"q":"Chất nào sau đây là hydrocarbon?","o":["C2H5Cl","C2H5OH","C2H6","CH3CHO"],"a":2},{"q":"Hợp chất CH3COCH3 (acetone) thuộc loại hợp chất nào sau đây?","o":["Aldehyde","Alcohol","Carboxylic acid","Ketone"],"a":3},{"q":"Cho các chất: CH3CH2OH, CH3CHO, CH3COOH, CH3COCH3, CH3OCH3. Số chất có nhóm C=O trong phân tử là","o":["2","3","4","5"],"a":1},{"q":"Trong phòng thí nghiệm, phương pháp chiết lỏng – lỏng thường dùng dụng cụ nào sau đây?","o":["Phễu chiết.","Bình cầu và ống sinh hàn.","Phễu lọc và giấy lọc.","Cốc thủy tinh và đũa thủy tinh."],"a":0},{"q":"Hợp chất hữu cơ X có công thức đơn giản nhất là CH2O. Phổ khối lượng của X cho thấy peak ion phân tử có giá trị m/z = 90. Số nguyên tử oxygen trong một phân tử X là","o":["1","2","3","4"],"a":2},{"q":"Hợp chất hữu cơ X có thành phần %C = 60,00; %H = 13,33; còn lại là O. Phổ khối lượng của X có peak ion phân tử [M+] với m/z = 60. Phổ IR của X có một peak hấp thụ mạnh, rộng ở vùng 3650 – 3200 cm^−1 (đặc trưng cho liên kết O–H của alcohol) và không có peak hấp thụ ở vùng 1780 – 1650 cm^−1 (đặc trưng cho nhóm C=O). Công thức cấu tạo của X là","o":["CH3CH(OH)CH3","CH3OCH2CH3","CH3CH2CHO","CH3COCH3"],"a":0},{"q":"Số đồng phân cấu tạo mạch hở (gồm alcohol và ether) ứng với công thức phân tử C4H10O là","o":["4","5","6","7"],"a":3},{"q":"Cho các phát biểu sau: (a) Chưng cất thường được dùng để tách các chất lỏng có nhiệt độ sôi chênh lệch đáng kể. (b) Phổ khối lượng (MS) cho biết các nhóm chức có trong phân tử hợp chất hữu cơ. (c) Các đồng phân có cùng công thức phân tử nhưng tính chất hóa học có thể khác nhau. (d) Hai chất hơn kém nhau một hay nhiều nhóm CH2 luôn là đồng đẳng của nhau. (e) Kết tinh dựa vào sự thay đổi độ tan của chất rắn theo nhiệt độ. Số phát biểu đúng là","o":["2","3","4","5"],"a":1}];
+const TF=[{"stem":"Chuẩn độ 10,00 mL dung dịch HCl chưa biết nồng độ bằng dung dịch NaOH 0,100 M (có vài giọt chỉ thị phenolphthalein). Thể tích dung dịch NaOH trung bình đã dùng tại điểm tương đương (dung dịch bắt đầu chuyển sang màu hồng bền) là 12,50 mL.","items":[["Phenolphthalein có màu hồng trong môi trường acid.",false],["Tại điểm tương đương, số mol NaOH đã dùng bằng số mol HCl có trong 10,00 mL dung dịch mẫu.",true],["Nồng độ của dung dịch HCl ban đầu là 0,125 M.",true],["Sau khi thêm 10,00 mL dung dịch NaOH 0,100 M vào 10,00 mL dung dịch HCl mẫu, pH của dung dịch thu được xấp xỉ 1,9.",true]]},{"stem":"Một học sinh nghiên cứu phân đạm ammonium sulfate, (NH4)2SO4. Thí nghiệm 1: cho dung dịch NaOH dư vào ống nghiệm chứa dung dịch (NH4)2SO4, đun nhẹ, đặt mẩu giấy quỳ tím ẩm ở miệng ống nghiệm. Thí nghiệm 2: nhỏ dung dịch BaCl2 vào dung dịch (NH4)2SO4.","items":[["Ở thí nghiệm 1, mẩu giấy quỳ tím ẩm chuyển sang màu đỏ.",false],["Ở thí nghiệm 2, thu được kết tủa trắng BaSO4, chứng tỏ trong dung dịch có ion SO4^2−.",true],["Cho 13,2 gam (NH4)2SO4 tác dụng hoàn toàn với dung dịch NaOH dư, đun nóng, thu được 2,479 lít khí NH3 (ở điều kiện chuẩn 25 °C, 1 bar; thể tích mol khí là 24,79 L/mol).",false],["Để cung cấp 14 kg nitrogen cho đất, cần bón tối thiểu 66 kg (NH4)2SO4 (coi phân bón chỉ chứa (NH4)2SO4 nguyên chất).",true]]},{"stem":"Sulfuric acid được sản xuất trong công nghiệp theo phương pháp tiếp xúc từ sulfur qua các giai đoạn: S → SO2 → SO3 → H2SO4. Giai đoạn oxi hóa SO2: 2SO2(g) + O2(g) ⇌ 2SO3(g); ΔH = −198 kJ (xúc tác V2O5).","items":[["Ở điều kiện thường, sulfur là chất rắn màu vàng, không tan trong nước.",true],["Để tăng hiệu suất tạo SO3, cần tăng nhiệt độ của hệ phản ứng càng cao càng tốt.",false],["Từ 3,2 tấn sulfur, với hiệu suất toàn bộ quá trình là 90%, thu được 8,82 tấn H2SO4.",true],["Hấp thụ hoàn toàn 2,479 lít khí SO2 (ở điều kiện chuẩn 25 °C, 1 bar; thể tích mol khí là 24,79 L/mol) vào 150 mL dung dịch NaOH 1,0 M, thu được dung dịch chứa 0,05 mol Na2SO3 và 0,10 mol NaHSO3.",false]]},{"stem":"Đốt cháy hoàn toàn 1,48 gam hợp chất hữu cơ W (chứa C, H, O) thu được 3,52 gam CO2 và 1,80 gam H2O. Phổ khối lượng của W có peak ion phân tử [M+] với giá trị m/z = 74. Phổ hồng ngoại (IR) của W có một peak hấp thụ mạnh, rộng trong vùng 3500 – 3200 cm^−1 và không có peak hấp thụ trong vùng 1780 – 1650 cm^−1. Bảng tín hiệu phổ IR của một số nhóm chức:","items":[["Công thức đơn giản nhất của W khác công thức phân tử của W.",false],["Phổ IR cho thấy trong phân tử W có nhóm –OH và không có nhóm C=O.",true],["W có 3 đồng phân cấu tạo thuộc loại alcohol.",false],["Trong các đồng phân cấu tạo mạch hở có cùng công thức phân tử với W, có 3 đồng phân thuộc loại ether.",true]],"table":{"h":["Liên kết","Hợp chất","Số sóng (cm^−1)"],"r":[["O–H","alcohol","3650 – 3200"],["O–H","carboxylic acid","3300 – 2500"],["C=O","aldehyde, ketone, ester, carboxylic acid","1780 – 1650"],["C–H","alkane","3000 – 2850"]]}}];
+const SHORT=[{"q":"Pha loãng 10,0 mL dung dịch NaOH có pH = 13 (ở 25 °C) bằng nước cất đến thể tích 1,00 L. Giá trị pH của dung dịch sau khi pha loãng là bao nhiêu?","a":["11"]},{"q":"Cho các chất sau: (1) CH3CH2CH2CH3; (2) CH3CH(CH3)CH3; (3) CH3CH2CH2OH; (4) CH3CH(OH)CH3; (5) CH3OCH2CH3; (6) CH3CH2OH. Có bao nhiêu cặp chất (không tính thứ tự) là đồng phân cấu tạo của nhau?","a":["4"]},{"q":"Cho 2,0 mol N2 và 6,0 mol H2 vào bình kín dung tích 2,0 L ở nhiệt độ T (có xúc tác thích hợp). Khi phản ứng N2(g) + 3H2(g) ⇌ 2NH3(g) đạt trạng thái cân bằng, trong bình có 2,0 mol NH3. Giá trị Kc của phản ứng ở nhiệt độ T là bao nhiêu? (Làm tròn kết quả đến hàng phần trăm.)","a":["0.59","0,59"]},{"q":"Hòa tan hoàn toàn 14,4 gam hỗn hợp X gồm Cu và CuO trong dung dịch HNO3 loãng, dư, thu được 2,479 lít khí NO (sản phẩm khử duy nhất; ở điều kiện chuẩn 25 °C, 1 bar; thể tích mol khí là 24,79 L/mol). Khối lượng CuO trong X là bao nhiêu gam?","a":["4.8","4,8"]},{"q":"Độ tan (gam chất tan trong 100 gam nước) của hai chất rắn X và Y như sau: X: 60 ở 80 °C và 10 ở 20 °C; Y: 38 ở 80 °C và 36 ở 20 °C. Một mẫu rắn gồm 90 gam X lẫn 10 gam Y được hòa tan hoàn toàn trong lượng nước tối thiểu ở 80 °C, sau đó làm lạnh dung dịch về 20 °C (coi độ tan của mỗi chất không phụ thuộc vào chất kia). Khối lượng tinh thể X tách ra là bao nhiêu gam?","a":["75"]},{"q":"Đốt cháy hoàn toàn 0,60 gam hợp chất hữu cơ Y (chứa C, H, O, N), thu được 0,44 gam CO2; 0,36 gam H2O và 0,28 gam N2. Phổ khối lượng của Y cho biết peak ion phân tử [M+] có m/z = 60. Tổng số nguyên tử trong một phân tử Y là bao nhiêu?","a":["8"]}];
+
+/* ----- hiển thị công thức hóa học: chỉ số dưới, chỉ số trên, điện tích (không đổi nội dung) ----- */
+function esc(s){return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+function fmt(s){
+  let t=esc(s);
+  t=t.replace(/\^([−-]?\d+[+−]?)/g,'<sup>$1</sup>');                 // 10^-3, SO4^2−, [SO3]^2
+  t=t.replace(/([A-Za-z0-9\]])([+−])(?=[\s\]\).,;:]|$)/g,'$1<sup>$2</sup>'); // H+, NH4+, OH−
+  t=t.replace(/(?<=[A-Za-z)])(\d+)(?![\d]*<\/sup>)/g,'<sub>$1</sub>'); // H2O, SO4, C6H12O6
+  t=t.replace(/\bKc\b/g,'K<sub>c</sub>');
+  return t;
+}
+const $=id=>document.getElementById(id);
+function tbl(t){return '<div style="overflow-x:auto"><table class="dt"><tr>'+t.h.map(c=>'<th>'+fmt(c)+'</th>').join('')+'</tr>'+t.r.map(r=>'<tr>'+r.map(c=>'<td>'+fmt(c)+'</td>').join('')+'</tr>').join('')+'</table></div>'}
+
+/* ----- dựng đề ----- */
+MCQ.forEach((x,i)=>{
+  $('mcq').insertAdjacentHTML('beforeend',`<div class="q" id="qm${i}"><div class="qh"><b>Câu ${i+1}.</b> ${fmt(x.q)}</div><div class="opts">${x.o.map((o,j)=>`<label class="opt" data-j="${j}"><input type="radio" name="m${i}" value="${j}"><span class="l">${String.fromCharCode(65+j)}</span><span>${fmt(o)}</span></label>`).join('')}</div></div>`);
+});
+TF.forEach((x,i)=>{
+  $('tf').insertAdjacentHTML('beforeend',`<div class="q" id="qt${i}"><div class="qh"><b>Câu ${i+1}.</b> ${fmt(x.stem)}</div>${x.table?tbl(x.table):''}<div class="tf">${x.items.map((it,j)=>`<div class="tfrow" id="tr${i}_${j}"><div>${String.fromCharCode(97+j)}) ${fmt(it[0])}<div class="k"></div></div><div class="seg"><label><input type="radio" name="t${i}_${j}" value="1"><span>Đúng</span></label><label><input type="radio" name="t${i}_${j}" value="0"><span>Sai</span></label></div></div>`).join('')}</div></div>`);
+});
+SHORT.forEach((x,i)=>{
+  $('short').insertAdjacentHTML('beforeend',`<div class="q short" id="qs${i}"><div class="qh"><b>Câu ${i+1}.</b> ${fmt(x.q)}</div><div class="ans"><input id="s${i}" placeholder="Nhập đáp án" autocomplete="off"><span class="keyline" id="k${i}"></span></div></div>`);
+});
+function pills(id,n,prefix,target){
+  $(id).innerHTML=Array.from({length:n},(_,i)=>`<a href="#${target}${i}" id="${prefix}${i}">${i+1}</a>`).join('');
+}
+pills('nI',MCQ.length,'pm','qm');pills('nII',TF.length,'pt','qt');pills('nIII',SHORT.length,'ps','qs');
+
+/* ----- tiến độ ----- */
+function progress(){
+  let n=0;
+  MCQ.forEach((_,i)=>{const d=!!document.querySelector(`input[name=m${i}]:checked`);$('pm'+i).classList.toggle('done',d);n+=d});
+  TF.forEach((x,i)=>{const c=x.items.filter((_,j)=>document.querySelector(`input[name=t${i}_${j}]:checked`)).length;
+    $('pt'+i).classList.toggle('done',c===x.items.length);$('pt'+i).classList.toggle('part',c>0&&c<x.items.length);n+=(c===x.items.length)});
+  SHORT.forEach((_,i)=>{const d=$('s'+i).value.trim()!=='';$('ps'+i).classList.toggle('done',d);n+=d});
+  const total=MCQ.length+TF.length+SHORT.length;
+  $('cnt').textContent=`${n} / ${total} câu đã làm`;
+  $('meter').style.width=(100*n/total)+'%';
+  $('remain').textContent=n===total?'Bạn đã làm hết tất cả các câu.':`Còn ${total-n} câu chưa hoàn thành.`;
+}
+document.addEventListener('input',e=>{if(!locked){progress();if(['hoten','lop','sbd'].includes(e.target.id))e.target.classList.remove('err')}});
+progress();
+
+/* ----- bảo vệ phiên thi và đồng hồ theo thời gian thực ----- */
+const EXAM_KEY='hoa11_cki_nc_103_security_v1';
+const DURATION=50*60*1000;
+let locked=false, started=false, deadline=0, totalSec=50*60;
+let reasonEnded='', resizeTask=null, it=null, submissionSent=false;
+const timer=$('timer'),bar=$('bar');
+function readState(){try{return JSON.parse(localStorage.getItem(EXAM_KEY)||'null')}catch(e){return null}}
+function writeState(x){try{localStorage.setItem(EXAM_KEY,JSON.stringify(x))}catch(e){}}
+function answersSnapshot(){
+  const answers={};
+  document.querySelectorAll('input[name]:checked').forEach(el=>answers[el.name]=el.value);
+  SHORT.forEach((_,i)=>answers['s'+i]=$('s'+i).value);
+  return answers;
+}
+function persistActive(){
+  if(!started||locked)return;
+  writeState({status:'active',deadline,hoTen:$('hoten').value,lop:$('lop').value,sbd:$('sbd').value,answers:answersSnapshot()});
+}
+function showEnded(reason,status){
+  $('securityReason').textContent=reason||'Phiên thi đã kết thúc.';
+  $('securitySend').textContent=status||'';
+  document.body.classList.add('exam-ended');
+  $('securityStart').hidden=true;
+  $('securityEnd').style.display='flex';
+}
+function updateClock(){
+  if(!started||locked)return;
+  totalSec=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+  const m=Math.floor(totalSec/60),s=totalSec%60;
+  timer.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  bar.style.width=`${100*(1-totalSec/(50*60))}%`;
+  $('timebox').classList.toggle('low',totalSec<=300);
+  if(totalSec===0)submitExam(true,'Hết thời gian làm bài');
+}
+function startExam(){
+  const name=$('startName').value.trim(),cls=$('startClass').value.trim(),sbd=$('startSbd').value.trim();
+  if(!name||!cls||!sbd){$('securityStartError').textContent='Vui lòng nhập đủ Họ tên, Lớp và SBD.';return}
+  if(readState()){showEnded('Phiên thi này đã được sử dụng trên trình duyệt hiện tại.');return}
+  $('hoten').value=name;$('lop').value=cls;$('sbd').value=sbd;
+  document.querySelectorAll('#hoten,#lop,#sbd').forEach(el=>el.readOnly=true);
+  started=true; deadline=Date.now()+DURATION;
+  $('securityStart').hidden=true;
+  persistActive();updateClock();it=setInterval(updateClock,500);
+}
+$('startBtn').addEventListener('click',startExam);
+const past=readState();
+if(past){showEnded(past.reason||'Bài thi đã kết thúc hoặc bị gián đoạn trước đó. Không thể mở lại.');}
+document.addEventListener('change',persistActive);
+document.addEventListener('input',persistActive);
+
+// Trên điện thoại, khi ứng dụng/tab bị ẩn, chấm và khóa ngay.
+document.addEventListener('visibilitychange',()=>{
+  if(started&&!locked&&document.visibilityState==='hidden'){
+    submitExam(true,'Rời khỏi trang thi / chuyển ứng dụng / khóa màn hình',true);
+  }
+});
+// Điều hướng hoặc tải lại giữa phiên: khóa lần làm trên trình duyệt này.
+window.addEventListener('pagehide',()=>{
+  if(started&&!locked)submitExam(true,'Đóng, tải lại hoặc rời trang thi',true);
+});
+// Heuristic chia màn hình: chỉ đo chiều rộng, tránh nhầm bàn phím ảo.
+// Không có API web nào phát hiện chắc chắn mọi kiểu chia màn hình.
+let referenceWidth=window.innerWidth;
+window.addEventListener('resize',()=>{
+  if(!started||locked)return;
+  clearTimeout(resizeTask);
+  resizeTask=setTimeout(()=>{
+    if(!started||locked)return;
+    const w=window.innerWidth;
+    if(w<referenceWidth*0.75 && referenceWidth-w>110){
+      submitExam(true,'Cửa sổ bài thi bị thu nhỏ bất thường (nghi chia màn hình)',true);
+    }
+  },350);
+});
+
+function norm(v){return String(v??'').trim().replace(/\s+/g,'').toUpperCase()}
+
+/* ----- nộp bài ----- */
+async function submitExam(auto=false,reason="",security=false){
+  if(locked)return;
+  const hoTen=$('hoten').value.trim(), lop=$('lop').value.trim(), sbd=$('sbd').value.trim();
+  if(!auto && (!hoTen||!lop||!sbd)){
+    ['hoten','lop','sbd'].forEach(id=>{if(!$(id).value.trim())$(id).classList.add('err')});
+    window.scrollTo({top:0,behavior:'smooth'});
+    alert('Vui lòng nhập đầy đủ Họ tên, Lớp và SBD trước khi nộp bài.');return;
+  }
+  if(!auto&&!confirm('Bạn chắc chắn muốn nộp bài?'))return;
+  locked=true; clearInterval(it);
+  reasonEnded=reason;
+  writeState({status:'ended',reason:reason||'Đã nộp bài',endedAt:new Date().toISOString(),hoTen,lop,sbd});
+  let p1=0,p2=0,p3=0; let review=[];
+  let mcqDung=0, tfYDung=0, shortDung=0;
+
+  MCQ.forEach((x,i)=>{
+    const el=document.querySelector(`input[name=m${i}]:checked`); const got=el?+el.value:null;
+    const ok=got===x.a; if(ok){p1+=0.25;mcqDung++;}
+    document.querySelectorAll(`#qm${i} .opt`).forEach(l=>{const j=+l.dataset.j; if(j===x.a)l.classList.add('ok'); else if(j===got)l.classList.add('bad')});
+    $('pm'+i).classList.remove('done');$('pm'+i).classList.add(ok?'ok':'bad');
+    review.push([`I.${i+1}: ${got===null?'—':String.fromCharCode(65+got)} / ${String.fromCharCode(65+x.a)}`,ok]);
+  });
+  TF.forEach((x,i)=>{
+    let c=0;
+    x.items.forEach((itm,j)=>{
+      const el=document.querySelector(`input[name=t${i}_${j}]:checked`); const got=el?el.value==='1':null;
+      const ok=got===itm[1]; if(ok){c++;tfYDung++;}
+      const row=$(`tr${i}_${j}`); row.classList.add(ok?'ok':'bad');
+      row.querySelector('.k').innerHTML=`<span class="${ok?'ok-t':'bad-t'}">${ok?'✓ Chính xác':'✗ Đáp án đúng: '+(itm[1]?'Đúng':'Sai')}</span>`;
+      review.push([`II.${i+1}${String.fromCharCode(97+j)}: ${got===null?'—':(got?'Đ':'S')} / ${itm[1]?'Đ':'S'}`,ok]);
+    });
+    p2 += [0,0.1,0.25,0.5,1][c];
+    $('pt'+i).classList.remove('done','part');$('pt'+i).classList.add(c===x.items.length?'ok':'bad');
+  });
+  SHORT.forEach((x,i)=>{
+    const raw=$(`s${i}`).value; const got=norm(raw); const ok=x.a.some(a=>norm(a)===got);
+    if(ok){p3+=0.25;shortDung++;}
+    $(`s${i}`).classList.add(ok?'ok':'bad');
+    $(`k${i}`).innerHTML=ok?'<span class="ok-t">✓ Chính xác</span>':`<span class="bad-t">✗ Đáp án đúng: ${fmt(x.a[0])}</span>`;
+    $('ps'+i).classList.remove('done');$('ps'+i).classList.add(ok?'ok':'bad');
+    review.push([`III.${i+1}: ${got||'—'} / ${x.a[0]}`,ok]);
+  });
+
+  const score=Math.round((p1+p2+p3)*100)/100;
+  const soCauDung=mcqDung+tfYDung+shortDung;
+  totalSec=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+  const usedSec=50*60-Math.max(totalSec,0);
+  const mm=Math.floor(usedSec/60), ss=usedSec%60;
+  const thoiGianLamBai=`${mm} phút ${ss} giây`;
+
+  document.querySelectorAll('input,button').forEach(e=>e.disabled=true);
+  $('timebox').classList.remove('low');
+  const res=$('result'); res.style.display='block';
+  $('scoreNum').textContent=score.toFixed(2);
+  $('ring').style.setProperty('--p',score*10);
+  $('ring').style.setProperty('--c',score>=8?'var(--ok)':score>=5?'var(--brand)':'var(--bad)');
+  $('breakdown').innerHTML=`<div class="part"><small>Phần I</small><b>${p1.toFixed(2)}/4.50</b></div><div class="part"><small>Phần II</small><b>${p2.toFixed(2)}/4.00</b></div><div class="part"><small>Phần III</small><b>${p3.toFixed(2)}/1.50</b></div>`;
+  $('sendStatus').textContent='Đang gửi kết quả về Google Sheets...';
+  $('review').innerHTML=security?'':review.map(r=>`<span class="${r[1]?'ok':'bad'}">${esc(r[0])}</span>`).join('');
+  if(security){
+    // Không công khai đáp án sau khi vi phạm. Khóa giao diện đồng bộ.
+    showEnded(reason,'Đang gửi kết quả và lý do kết thúc về Google Sheets...');
+  } else res.scrollIntoView({behavior:'smooth'});
+
+  const payload={hoTen,lop,sbd,maDe:MA_DE,diem:score.toFixed(2),soCauDung,thoiGianLamBai,
+    trangThai:security?'Kết thúc do giám sát':(reason||'Nộp bài'),lyDoViPham:security?reason:'',
+    thoiDiemKetThuc:new Date().toISOString()};
+  const body=JSON.stringify(payload);
+  try{
+    // Beacon được ưu tiên khi trang chuyển nền; trình duyệt không bảo đảm giao nhận.
+    if(security && navigator.sendBeacon){
+      const queued=navigator.sendBeacon(GOOGLE_SCRIPT_URL,new Blob([body],{type:'text/plain;charset=UTF-8'}));
+      if(!queued)throw new Error('Không đưa được vào hàng đợi');
+      $('securitySend').textContent='Đã yêu cầu gửi kết quả; cần đối chiếu Google Sheets để xác nhận.';
+    }else{
+      await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body});
+      $('sendStatus').textContent='Đã gửi yêu cầu đến Google Sheets (không xác minh được phản hồi).';
+    }
+  }catch(err){
+    $('sendStatus').textContent='Không gửi được kết quả. Hãy báo giáo viên.';
+    if(security)$('securitySend').textContent='Không gửi được kết quả. Hãy báo giáo viên.';
+  }
+}
+$('submit').onclick=()=>submitExam(false);
+</script>
+</body>
+</html>
